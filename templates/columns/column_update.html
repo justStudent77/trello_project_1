@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Update card</h1>
+{% if card.column.board.image %}
+<style>
+body {background-image:url({{ card.column.board.image.url}}); background-size: cover;}
+</style>
+{% endif %}
+<form method="post">
+{% csrf_token %}
+Column tile:<br>
+<input name="title" value="{{ column.title }}">
+<br><br>
+Belongs to board:<br>
+<input name="board" value="{{ column.board }}">
+<input type="submit" value="Update">
+</form>
+
+{% endblock %}

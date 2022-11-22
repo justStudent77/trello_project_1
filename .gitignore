@@ -1,0 +1,7 @@
+.env
+main/__pycache__
+trello_project/__pycache__
+users/__pycache__
+venv/
+.idea/
+

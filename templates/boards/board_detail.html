@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1 xmlns="http://www.w3.org/1999/html">{{ board.title }}</h1>
+{% if board.image %}
+<style>
+body {background-image:url({{ board.image.url}}); background-size: cover;}
+</style>
+{% endif %}
+
+<div class="container-fluid- citybackground" >
+<ul>
+    <h3>Columns</h3>
+    {% for column in columns %}
+    <li>
+        <p
+            role="button"
+            onclick="location.href='{% url "column_view" pk=board.id column_id=column.id %}'">
+            {{ column.title }}
+        </p>
+    </li>
+    {% empty %}
+    <h4>This board has no columns</h4>
+    {% endfor %}
+        <h3>Members</h3>
+    {% for member in members %}
+    <li>
+        <p>
+          {{ member }}
+        </p>
+    </li>
+    {% empty %}
+    <h4>This board has no members</h4>
+    {% endfor %}
+
+</ul>
+</div>
+<p>
+    <input
+        value="Add a new column"
+        type="button"
+        onclick="location.href='{% url "column-add" board.id %}'"</input>
+    <input
+        value="Delete this board"
+        type="button"
+        onclick="location.href=
+        '{% url "board_delete" board.id %}'" />
+    <input
+        value="Archive/Dearchive this board"
+        type="button"
+        onclick="location.href=
+        '{% url "board_archive" board.id %}'" />
+    <input
+        value="Add to/Remove from favourites this board"
+        type="button"
+        onclick="location.href=
+        '{% url "board_preferred" board.id %}'" />
+    <input
+        value="Edit this board"
+        type="button"
+        onclick="location.href=
+        '{% url "board_update" board.id %}'" />
+</p>
+{% endblock %}

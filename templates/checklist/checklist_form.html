@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="col-md-8 offset-md-2">
+    <h3>Create a checklist:</h3>
+<!--    <form action="/boards/" method="post">-->
+    <form method="post">
+    {% csrf_token %}
+        <div class="form-group">
+            {{ form.title }}
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+</div>
+
+
+{% endblock %}

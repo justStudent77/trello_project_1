@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Update checklist</h1>
+
+<form method="post">
+{% csrf_token %}
+Mark title:<br>
+<input name="title" value="{{ mark.title }}">
+<br><br>
+Mark colour:<br>
+<input name="colour" value="{{ mark.colour }}">
+<br><br>
+Belongs to:<br>
+<input name="card" value="{{ mark.card.title }}">
+<br><br>
+
+    <div class="row">
+        <input type="submit" value="Update">
+        <input
+        value="Delete"
+        type="button"
+        onclick="location.href=
+        '{% url "mark-delete" pk=board.id column_id=column.id card_id=card.id mark_id=mark.id%}'"</input>
+    </div>
+
+</form>
+
+{% endblock %}

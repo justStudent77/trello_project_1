@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<section class="">
+  <!-- Jumbotron -->
+  <div class="px-4 py-5 px-md-5 text-center text-lg-start" style="background-color: hsl(0, 0%, 96%)">
+    <div class="container">
+      <div class="row gx-lg-5 align-items-center">
+        <div class="col-lg-6 mb-5 mb-lg-0">
+          <h1 class="my-5 display-3 fw-bold ls-tight">Get started<br />
+            <span class="text-primary">with Trello</span>
+          </h1>
+          <p style="color: hsl(217, 10%, 50.8%)">
+            Organize your workflow in a professional or casual fashion.
+            Work collectively by inviting colleagues and friends or individually
+            by setting a clear pattern to perform your plans efficiently.
+          </p>
+        </div>
+
+        <div class="col-lg-6 mb-5 mb-lg-0">
+            <div class="card-body py-5 px-md-5">
+              <form method="POST" action="">
+				{% csrf_token %}
+                <!-- 2 column grid layout with text inputs for the first and last names -->
+                <div class="input-group mb-2">
+					{{form.first_name}}
+                 </div>
+                <div class="input-group mb-2">
+					{{form.last_name}}
+                 </div>
+                <div class="input-group mb-2">
+					{{form.username}}
+                </div>
+				<div class="input-group mb-2">
+					{{form.email}}
+				</div>
+                <!-- Password input -->
+				<div class="input-group mb-2">
+					{{form.password1}}
+				</div>
+				 <!-- Password confirmation -->
+				<div class="input-group mb-2">
+					{{form.password2}}
+				</div>
+                <!-- Checkbox -->
+                <div class="d-flex justify-content-center mt-3 login_container">
+					<input class="btn login_btn" type="submit" value="Register Account"
+					style="background-color:#007bff;color:white">
+				</div>
+			  </form>
+			</div>
+			{{form.errors}}
+			<div class="mt-4">
+				<div class="d-flex justify-content-center links", style="color: hsl(217, 10%, 50.8%)">
+						Already have an account? <a href="{% url 'login' %}" class="ml-2">Login</a>
+				</div>
+			</div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+		<script>
+		/* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
+		//We start indexing at one because CSRF_token is considered and input field
+		 */
+
+		//Query All input fields
+
+		var form_fields = document.getElementsByTagName('input')
+		form_fields[1].placeholder='First Name...';
+		form_fields[2].placeholder='Last Name...';
+		form_fields[3].placeholder='Username...';
+		form_fields[4].placeholder='Email...';
+		form_fields[5].placeholder='Enter password...';
+		form_fields[6].placeholder='Re-enter Password...';
+
+
+		for (var field in form_fields){
+			form_fields[field].className += ' form-control'
+		}
+	</script>
+  <!-- Jumbotron -->
+</section>
+
+
+<!--<a href="{% url 'login' %}">Back to login</a>-->
+{% endblock %}

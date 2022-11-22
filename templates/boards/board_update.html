@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Update card</h1>
+
+<form method="post">
+{% csrf_token %}
+<h3>Update board</h3>
+Board tile:<br>
+<input name="name" value="{{ board.title }}">
+{% if request.user == board.creator %}
+    <select name="members" id="member-select" multiple>
+        <option value="">--Please select members--</option>
+        {% for member in members %}
+        <option value="{{member.username}}">{{member.username}}</option>
+        {% endfor %}
+    </select>
+{% endif %}
+<input type="submit" value="Update">
+</form>
+
+{% endblock %}

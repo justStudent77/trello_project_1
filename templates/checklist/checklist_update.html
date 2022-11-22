@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Update checklist</h1>
+
+<form method="post">
+{% csrf_token %}
+Checklist title:<br>
+<input name="title" value="{{ checklist.title }}">
+<br><br>
+Belongs to:<br>
+<input name="card" value="{{ checklist.card.title }}">
+<br><br>
+    <div class="row">
+        <input type="submit" value="Update">
+        <input
+        value="Delete"
+        type="button"
+        onclick="location.href=
+        '{% url "checklist-delete" pk=board.id column_id=column.id card_id=card.id checklist_id=checklist.id%}'"</input>
+    </div>
+
+</form>
+
+{% endblock %}

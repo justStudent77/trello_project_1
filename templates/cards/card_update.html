@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<h1>Update card</h1>
+
+<form method="post">
+{% csrf_token %}
+Card tile:<br>
+<input name="title" value="{{ card.title }}">
+<br><br>
+Card description:<br>
+<input name="description" value="{{ card.description }}">
+<br><br>
+Due date:<br>
+<input name="due_date" type="date" placeholder="{{ card.due_date }}" value="{{ card.due_date }}">
+<br><br>
+Belongs to:<br>
+<input name="column" value="{{ card.column.title }}">
+<br><br>
+<input type="submit" value="Update">
+</form>
+
+{% endblock %}

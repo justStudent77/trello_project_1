@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+{{ user.username }}
+<br>
+<p>If you want add this user to a board, please follow the hereby mentioned instruction</p>
+    <input
+        value="Add to a board"
+        type="button"
+        onclick="location.href=
+        '{% url "boards" %}'" />
+
+{% endblock %}

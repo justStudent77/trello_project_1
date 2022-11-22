@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 xmlns="http://www.w3.org/1999/html">{{ card.title }}</h1>
+<div class="row">
+<ul>
+    <p>
+        Card Description: {{ card.description }}<br>
+        Author: {{ card.column.board.creator.username }}<br>
+        Within column: {{ card.column.title }}<br>
+        Has to be done until: {{card.due_date}}
+    </p>
+    <div>
+        <h4> Checklists of {{ card.title }} </h4>
+        {% for checklist in checklists %}
+        <p style="font-style: italic;"><input type="checkbox"/> {{ checklist.title }}
+        <input
+        value="Update checklist"
+        type="button"
+        onclick="location.href=
+        '{% url "checklist-update" pk=board.id column_id=column.id card_id=card.id checklist_id=checklist.id %}'" />
+        </p>
+
+        {% empty %}
+        <h5> This card has no checklists </h5>
+        {% endfor %}
+    </div>
+
+    <div>
+        <h4> Marks of {{ card.title }} </h4>
+        {% for mark in marks %}
+        <style>
+<!--.dot {-->
+<!--  height: 25px;-->
+<!--  width: 25px;-->
+<!--  background-color: {{ mark.colour}};-->
+<!--  border-radius: 50%;-->
+<!--  display: inline-block;-->
+<!--}-->
+</style>
+        <p style="font-style: italic;"><span class="dot"
+                                        style="  height: 25px;
+                                                width: 25px;
+                                                background-color: {{ mark.colour}};
+                                                border-radius: 50%;
+                                                display: inline-block;">
+        </span>
+            {{ mark.title }}
+        <input
+        value="Update mark"
+        type="button"
+        onclick="location.href=
+        '{% url "mark-update" pk=board.id column_id=column.id card_id=card.id mark_id=mark.id %}'" /></p>
+
+        {% empty %}
+        <h5> This card has no checklists </h5>
+        {% endfor %}
+    </div>
+</ul>
+        <div>
+        <input
+        value="Delete this card"
+        type="button"
+        onclick="location.href=
+        '{% url "card_delete" pk=board.id column_id=column.id card_id=card.id%}'" />
+        <input
+        value="Update this card"
+        type="button"
+        onclick="location.href=
+        '{% url "card_update" pk=board.id column_id=column.id card_id=card.id%}'" />
+         <input
+        value="Add a new checklist"
+        type="button"
+        onclick="location.href='{% url "checklist-add" card_id=card.id pk=board.id column_id=column.id %}'" />
+        <input
+        value="Add a new mark"
+        type="button"
+        onclick="location.href='{% url "mark-add" card_id=card.id pk=board.id column_id=column.id %}'"</input>
+        </div>
+
+
+<div class="col-md-8 offset-md-2">
+    <h3>Leave a comment:</h3>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.body }}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <h3>Comments:</h3>
+    {% for comment in comments %}
+    <p>
+        On {{comment.created_on.date }}&nbsp;
+        <b>{{ comment.author }}</b> wrote:
+    </p>
+    <p>{{ comment.body }}</p>
+    <hr>
+    {% endfor %}
+</div>
+        {% endblock %}

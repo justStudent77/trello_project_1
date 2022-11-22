@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+{% if object_list %}
+<ul>
+  {% for user in object_list %}
+    <li>
+          <li>
+        <p
+            role="button"
+            onclick="location.href='{% url "user_profile" user_id=user.username %}'">
+            {{ user.username }}
+        </p>
+    </li>
+    </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

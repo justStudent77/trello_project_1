@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<h1 xmlns="http://www.w3.org/1999/html">{{ column.title }}</h1>
+{% if column.board.image %}
+<style>
+body {background-image:url({{ column.board.image.url}}); background-size: cover;}
+</style>
+{% endif %}
+<div class="row">
+<ul>
+    {% for card in cards %}
+    <li>
+        <p
+            role="button"
+            onclick="location.href='{% url "card_view" pk=board.id column_id=column.id card_id=card.id%}'">
+            {{ card.title }}
+        </p>
+    </li>
+    {% empty %}
+    <h4>This column has no cards</h4>
+    {% endfor %}
+</ul>
+</div>
+<p>
+    <input
+        value="Add a new card"
+        type="button"
+        onclick="location.href='{% url "card-add" pk=board.id column_id=column.id %}'"</input>
+    <input
+        value="Delete this column"
+        type="button"
+        onclick="location.href=
+        '{% url "column_delete" pk=board.id column_id=column.id %}'" />
+    <input
+        value="Edit this column"
+        type="button"
+        onclick="location.href=
+        '{% url "column_update" pk=board.id column_id=column.id %}'" />
+</p>
+{% endblock %}

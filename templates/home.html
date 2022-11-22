@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <title>About Trello</title>
+    <p>This is a home page</p>
+</head>
+
+{% if user.is_authenticated %}
+<form action="{% url 'search_board' %}" method="get">
+  <input name="q" type="text" placeholder="Search Boards">
+    <button class="form-group" type="submit"> Search Boards </button>
+</form>
+{% endif %}
+<br>
+{% if user.is_authenticated %}
+<form action="{% url 'search_user' %}" method="get">
+  <input name="user_query" type="text" placeholder="Search Users">
+    <button class="form-group" type="submit"> Search Users </button>
+</form>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+<!-- todo_list/todo_app/templates/todo_app/index.html -->
+
+{% extends "base.html" %}
+{% block content %}
+<!--index.html-->
+{% if object_list %}
+{% if column.board.image %}
+<style>
+body {background-image:url({{ column.board.image.url}}); background-size: cover;}
+</style>
+{% endif %}
+<h3>All my boards</h3>
+{% endif %}
+<ul>
+    {% for board in boards %}
+    <li>
+        <p
+            role="button"
+            onclick="location.href='{% url "board_view" board.id %}'">
+            {{ board.title }}
+        </p>
+    </li>
+    {% empty %}
+    <h4>You have no boards!</h4>
+    {% endfor %}
+</ul>
+<p>
+    <input
+        value="Add a new board"
+        type="button"
+        onclick="location.href='{% url "board-add" %}'"/>
+</p>
+{% endblock %}
