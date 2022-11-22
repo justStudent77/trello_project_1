@@ -33,12 +33,6 @@ class CreateMark(View):
                 colour=form.cleaned_data["colour"],
             )
             mark.save()
-        context = {
-            "column": column,
-            "card": card,
-            "board": board,
-            "form": MarkForm
-        }
         return HttpResponseRedirect(reverse('card_view', args=(board.id, column.id, card.id)))
 
 
