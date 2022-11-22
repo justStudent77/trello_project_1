@@ -13,7 +13,6 @@ from .forms import CreateBoard
 class BoardListView(View):
 
     def get(self, request):
-        # boards = Board.objects.all()
         user = request.user
         archived_boards = list(user.archive.keys())
         boards = Board.objects.exclude(pk__in=archived_boards)

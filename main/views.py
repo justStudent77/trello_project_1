@@ -1,17 +1,8 @@
-import datetime
-
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
-from django.views import View
-from django.views.generic import DeleteView, ListView
-from django.template import loader
+from django.shortcuts import render
+from django.views.generic import ListView
 from django.db.models import Q
 
-from .models import Board, Column, Card, Comment, TrelloUser, CheckList, Mark
-from .forms import CreateBoard, CreateColumnForm, CreateCardForm, CommentForm, CheckListForm, MarkForm
-
-
-# Create your views here.
+from .models import Board, TrelloUser
 
 
 def about_page(request):
@@ -21,12 +12,6 @@ def about_page(request):
 def home(request):
     return render(request, "home.html")
 
-
-# -----------------------------------------
-# Checklists
-
-# ------------------------------------
-# Marks
 
 class SearchBoardResultView(ListView):
     model = Board

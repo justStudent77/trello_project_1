@@ -1,14 +1,10 @@
-import datetime
-
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
-from django.urls import reverse, reverse_lazy
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
+from django.urls import reverse
 from django.views import View
-from django.views.generic import DeleteView, ListView
 from django.template import loader
-from django.db.models import Q
 
-from .models import Board, Column, Card, Comment, TrelloUser, CheckList, Mark
-from .forms import CreateBoard, CreateColumnForm, CreateCardForm, CommentForm, CheckListForm, MarkForm
+from .models import Board, Column, Card, Comment
+from .forms import CreateCardForm, CommentForm
 
 
 class CreateCardView(View):
@@ -134,11 +130,5 @@ class UpdateCard(View):
         card.description = request.POST["description"]
         card.due_date = request.POST["due_date"]
         card.save()
-        context = {
-            "card": card,
-            "board": board,
-            "column": column,
-            "form": CommentForm
-        }
         return HttpResponseRedirect(reverse('card_view', args=(board.id, column.id, card.id)))
 
